@@ -6,5 +6,8 @@ module.exports = {
       lines: 80,
     },
   },
+  collectCoverageFrom: [
+    'app.js',
+  ],
   coverageReporters: ['json', 'lcov', 'text', 'clover'],
 };

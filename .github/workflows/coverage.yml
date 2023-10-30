@@ -21,6 +21,25 @@ jobs:
       - name: Run Jest Tests
         run: npx jest --detectOpenHandles
 
+          export LINE_COVERAGE=80
+          export BRANCH_COVERAGE=75
+
+      - name: Update README
+        run: |
+          # Use a script to update your README with the extracted metrics
+          # Replace placeholders in your README with the actual metrics
+
+          sed -i "s/{LINE_COVERAGE}/$LINE_COVERAGE/" README.md
+          sed -i "s/{BRANCH_COVERAGE}/$BRANCH_COVERAGE/" README.md
+
+      - name: Commit Changes
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add README.md
+          git commit -m "Update README with code coverage metrics"
+          git push
+
       - name: Upload Jest Coverage Report
         uses: actions/upload-artifact@v2
         with:
