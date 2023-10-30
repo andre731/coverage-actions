@@ -1,49 +1,15 @@
-name: Jest Coverage
+name: Generate Jest Coverage Report
 
-on: [push]
+on:
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  test:
+  coverage:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: ArtiomTr/jest-coverage-report-action@v2
         with:
-          node-version: "18"
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Run Jest Tests
-        run: npx jest --detectOpenHandles
-
-          export LINE_COVERAGE=80
-          export BRANCH_COVERAGE=75
-
-      - name: Update README
-        run: |
-          # Use a script to update your README with the extracted metrics
-          # Replace placeholders in your README with the actual metrics
-
-          sed -i "s/{LINE_COVERAGE}/$LINE_COVERAGE/" README.md
-          sed -i "s/{BRANCH_COVERAGE}/$BRANCH_COVERAGE/" README.md
-
-      - name: Commit Changes
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git commit -am "Update README with code coverage metrics"
-          git push https://github.com/andre731/coverage-actions.git HEAD:main
-
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-
-      - name: Upload Jest Coverage Report
-        uses: actions/upload-artifact@v2
-        with:
-          name: coverage
-          path: coverage
+          github-token: ${{ secrets.GH_TOKEN }}
