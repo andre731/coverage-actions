@@ -7,6 +7,9 @@ const app = express();
 app.use(express.json());
 
 app.get("/", async (req, res) => {
+  console.log("RAIZZZZZZZZZZZZZZZZZZZZZ " + PORT);
+
+
   return res.json({ message: "Olá, mundo!" });
 });
 
