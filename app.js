@@ -6,12 +6,17 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   return res.json({ message: "Olá, mundo!" });
 });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log("APP RODANDO NA PORTA " + PORT);
 });
 
-module.exports = app;
+
+const closeServer = () => {
+  server.close();
+};
+
+module.exports = {app, closeServer};
