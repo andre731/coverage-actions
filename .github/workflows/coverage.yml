@@ -13,7 +13,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14"
+          node-version: "18"
 
       - name: Install Dependencies
         run: npm install
@@ -37,7 +37,10 @@ jobs:
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
           git commit -am "Update README with code coverage metrics"
-          git push
+          git push https://github.com/andre731/coverage-actions.git HEAD:main
+
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Upload Jest Coverage Report
         uses: actions/upload-artifact@v2
