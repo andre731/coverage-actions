@@ -12,9 +12,9 @@ app.get("/", async (req, res) => {
   return res.json({ message: "Olá, mundo!" });
 });
 
-app.get("/2", async (req, res) => {
-  return res.json({ message: "ROTA 2" });
-});
+// app.get("/2", async (req, res) => {
+//   return res.json({ message: "ROTA 2" });
+// });
 
 const server = app.listen(PORT, () => {
   console.log("APP RODANDO NA PORTA " + PORT);
