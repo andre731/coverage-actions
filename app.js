@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/", async (req, res) => {
-  return res.json({ message: "Olá, mundo!" });
+  return res.json({ message: "PATATI" });
 });
 
 const server = app.listen(PORT, () => {
