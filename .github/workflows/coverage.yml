@@ -6,23 +6,8 @@ on:
       - main
 
 jobs:
-  check-test-action:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Check if test action is ready
-        id: check-test
-        run: |
-          # Replace this with your logic to check if the test action is ready.
-          # If the test action is ready, set the 'test-action-ready' output to 'true'.
-          # If it's not ready, set the output to 'false'.
-          echo "::set-output name=test-action-ready::true"  # Change this condition accordingly
-        continue-on-error: true
-
   coverage:
     runs-on: ubuntu-latest
-    needs: check-test-action
-    if: ${{ needs.check-test-action.outputs.test-action-ready == 'true' }}
     steps:
       - uses: actions/checkout@v3
       - uses: ArtiomTr/jest-coverage-report-action@v2
